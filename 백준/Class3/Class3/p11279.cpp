@@ -1,7 +1,8 @@
 ﻿// 백준 11279번 최대 힙
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 
-int main() {
+void p11279(){
 	int n, x, max_heap[100001], size = 0, tmp;
 
 	scanf("%d\n", &n);
@@ -64,5 +65,5 @@ int main() {
 		}
 	}
 
-	return 0;
+	return;
 }
