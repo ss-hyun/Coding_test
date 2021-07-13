@@ -15,3 +15,4 @@ void p11279();
 void p2630();
 void p1931();
 void p7576();
+void p11724();
