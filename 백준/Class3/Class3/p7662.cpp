@@ -37,9 +37,18 @@ void insert(int n){
 }
 
 void del(bool flag){	// flag : false (최대 삭제), true (최소 삭제)
+	if (last == 2){
+		last--;
+		return;
+	}
 	int n = smmh[last], del, comp;
 	if (flag){
 		comp = del = 2;
+		if (last == 3){
+			smmh[last - 1] = smmh[last];
+			last--;
+			return;
+		}
 		while ((comp <<= 1) < last){
 			if ((comp + 2 < last) && (smmh[comp] > smmh[comp+2])){
 				comp += 2;
@@ -57,7 +66,22 @@ void del(bool flag){	// flag : false (최대 삭제), true (최소 삭제)
 		smmh[del] = n;
 	}
 	else{
-		del = 3;
+		comp = del = 3;
+		while (++((--comp) <<= 1) < last){
+			if ((comp + 2 < last) && (smmh[comp] < smmh[comp + 2])){
+				comp += 2;
+			}
+			if (n < smmh[comp]){
+				smmh[del] = smmh[comp];
+				del = comp;
+				if (n < smmh[comp - 1]){
+					smmh[comp] = smmh[comp - 1];
+					smmh[comp - 1] = n;
+					n = smmh[comp];
+				}
+			}
+		}
+		smmh[del] = n;
 	}
 	last--;
 }
@@ -88,11 +112,19 @@ void p7662(){
 				insert(test[j].num);
 			}
 			else if (last != 1){
-				print_curr();
 				del(test[j].num != 1);
-				print_curr();
 			}
 		}
+		if (last != 1){
+			if (last != 2){
+				cout << smmh[3] << ' ' << smmh[2] << '\n';
+			}
+			else{
+				cout << smmh[2] << ' ' << smmh[2] << '\n';				
+			}
+		}
+		else
+			cout << "EMPTY\n";
 	}
 
 	return;
