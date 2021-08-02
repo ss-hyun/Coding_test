@@ -7,16 +7,32 @@ using namespace std;
 namespace s11725{
 	vector<int> tree[100001];
 	int par[100001];
-	bool visit[100001];
 
 	void dfs(int curr){
 		int next, size = tree[curr].size();
-		visit[curr] = true;
 
 		for (next = 0; next < size; next++){
-			if (!visit[tree[curr][next]]){
+			if (tree[curr][next] != par[curr]){
 				par[tree[curr][next]] = curr;
 				dfs(tree[curr][next]);
+			}
+		}
+		
+		return;
+	}
+
+	void dfs_iter(int root){
+		int stack[100000], size = 0, curr, next;
+
+		stack[size++] = 1;
+		while (stack[0]){
+			curr = stack[size - 1];
+			stack[--size] = 0;
+			for (next = 0; next < tree[curr].size(); next++){
+				if (tree[curr][next] != par[curr]){
+					par[tree[curr][next]] = curr;
+					stack[size++] = tree[curr][next];
+				}
 			}
 		}
 		
@@ -36,8 +52,8 @@ void p11725(){
 		tree[b].push_back(a);
 	}
 	
-	dfs(1);
-
+	//dfs(1);
+	dfs_iter(1);
 	n++;
 	for (i = 2; i < n; i++)
 		cout << par[i] << '\n';
