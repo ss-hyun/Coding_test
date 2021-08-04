@@ -47,16 +47,40 @@ namespace s11053{
 
 using namespace s11053;
 
+namespace s11053_dp{
+	int A[1000], dp[1000], *N;
+
+	int dp_max(){
+		int max = 0, i, j;
+
+		for (i = 0; i < *N; i++){
+			dp[i] = 1;
+			for (j = i - 1; j > -1; j--){
+				if (A[j] < A[i] && dp[j] >= dp[i])
+					dp[i] = dp[j] + 1;
+			}
+			if (max < dp[i])
+				max = dp[i];
+		}
+
+		return max;
+	}
+}
+
+using namespace s11053_dp;
+
 void p11053(){
 	int n, i, a;
-
+	N = &n;
 	scanf("%d", &n);
 	for (i = 0; i < n; i++){
 		scanf("%d", &a);
 		new_a(a);
+		A[i] = a;
 	}
 	
-	printf("%d", max_size());
+	printf("%d\n", max_size());
+	printf("%d", dp_max());
 
 	return;
 }
