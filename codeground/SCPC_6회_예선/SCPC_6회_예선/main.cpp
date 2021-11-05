@@ -16,6 +16,10 @@ int main(){
 		cout << problem << " 실행\n";
 		diet();
 	}
+	else if (problem == "match skill"){
+		cout << problem << " 실행\n";
+		match_skill();
+	}
 
 	system("pause");
 
