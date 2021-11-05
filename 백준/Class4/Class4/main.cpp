@@ -1,13 +1,10 @@
 ﻿#include <Windows.h>
 #include <iostream>
 #include "class4_problem_list.h"
-#include <vector>
 
 using namespace std;
 
 int main(){
-	vector<int> a;
-	cout << a.back() << endl;
 	cout << "실행시킬 문제 번호 입력 : ";
 
 	int problem;
