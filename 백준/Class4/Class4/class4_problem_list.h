@@ -9,3 +9,4 @@ void p1753();
 void p1932();
 void p1865();
 void p1918();
+void p1967();
